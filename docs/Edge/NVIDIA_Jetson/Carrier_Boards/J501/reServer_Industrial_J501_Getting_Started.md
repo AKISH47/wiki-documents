@@ -14,11 +14,11 @@ last_update:
 # Getting Started with reServer J501
 
 <div align="center">
-  <img width ="1000" src="https://files.seeedstudio.com/wiki/reComputer-Jetson/J501/reServer_J501.jpeg"/>
+  <img width ="1000" src="https://files.seeedstudio.com/wiki/reComputer-Jetson/J501/reServer_J501.png"/>
 </div>
 
 <div class="get_one_now_container" style={{textAlign: 'center'}}>
-  <a class="get_one_now_item" href="https://www.seeedstudio.com/reComputer-J401-Carrier-Board-for-Jetson-Orin-NX-Orin-Nano-without-Power-Adapter-p-5637.html">
+  <a class="get_one_now_item" href="https://www.seeedstudio.com/reServer-Industrial-J501-Carrier-Board-Add-on.html">
     <strong><span><font color={'FFFFFF'} size={"4"}> Get One Now 🖱️</font></span></strong>
   </a>
 </div>
@@ -41,7 +41,7 @@ The J501 carrier board is a powerful extension board that supports NVIDIA Jetson
     <tr>
       <td rowSpan={7}>I/O</td>
       <td>Ethernet</td>
-      <td> 1x LAN0 RJ45 GbE (10/100/1000Mbps), <br /> 1x LAN RJ45 GbE PoE(PSE 802.3 af 15 W, 10/100/1000Mbps) </td>
+      <td> 1x LAN0 RJ45 GbE (10/100/1000Mbps), <br /> 1x LAN RJ45 GbE (10/100/1000/10000Mbps) </td>
     </tr>
     <tr>
       <td>USB</td>
@@ -151,8 +151,37 @@ Here, we will show you how to flash [Jetpack](https://developer.nvidia.com/embed
 - NVMe M.2 2280 Internal SSD
 - USB Type-C data transmission cable
 
-:::note
-We do not recommend using virtual machines and ARM architecture Ubuntu for flashing.
+:::info
+
+We recommend that you use physical ubuntu host devices instead of virtual machines.
+Please refer to the table below to prepare the host machine.
+        
+<table style={{textAlign: 'center'}}>
+  <tbody>
+    <tr>
+        <td  rowspan="2"> JetPack Version </td>
+        <td class="dbon" colspan="3"> Ubuntu Version (Host Computer) </td>
+    </tr>
+    <tr>
+        <td > 18.04 </td>
+        <td > 20.04 </td>
+        <td > 22.04 </td>
+    </tr>
+    <tr>
+        <td >JetPack 5.x</td>
+        <td > ✅ </td>
+        <td > ✅ </td>
+        <td > </td>
+    </tr>
+    <tr>
+        <td >JetPack 6.x</td>
+        <td > </td>
+        <td > ✅ </td>
+        <td > ✅ </td>
+    </tr>
+  </tbody>
+</table>
+
 :::
 
 ### Prepare the Jetpack Image
@@ -167,6 +196,7 @@ Here, we need to download the system image to our Ubuntu PC corresponding to the
       <th>Jetson Module</th>
       <th> GMSL </th>
       <th>Download Link</th>
+      <th>Alternative Download Link</th>
     </tr>
   </thead>
   <tbody>
@@ -174,29 +204,58 @@ Here, we need to download the system image to our Ubuntu PC corresponding to the
       <td rowSpan={4}>5</td>
       <td>AGX Orin 32GB</td>
       <td>❌</td>
-      <td><a href="https://szseeedstudio-my.sharepoint.cn/:u:/g/personal/youjiang_yu_szseeedstudio_partner_onmschina_cn/ERG3upqXAQNHsJP6ZvG2MAEBGsndVCgrLnhcKvtWoGA6tA?e=14KO6z" target="_blank" rel="noopener noreferrer">Download</a></td>
+      <td><a href="https://seeedstudio88-my.sharepoint.com/:u:/g/personal/youjiang_yu_seeedstudio88_onmicrosoft_com/EagENvz49i1GhTAMR9xCLlkBHscdcSHkYf9PQuPFcgR50A?e=mOMJ2c" target="_blank" rel="noopener noreferrer">Download1</a></td>
+      <td><a href="https://szseeedstudio-my.sharepoint.cn/:u:/g/personal/youjiang_yu_szseeedstudio_partner_onmschina_cn/ERG3upqXAQNHsJP6ZvG2MAEBGsndVCgrLnhcKvtWoGA6tA?e=14KO6z" target="_blank" rel="noopener noreferrer">Download2</a></td>
     </tr>
     <tr>
       <td>AGX Orin 32GB</td>
       <td>✅</td>
-      <td><a href="https://szseeedstudio-my.sharepoint.cn/:u:/g/personal/youjiang_yu_szseeedstudio_partner_onmschina_cn/EZ7iNOxMxL9AjcKFPLygVT8Bg5qnkE-ZsMmNmHkZzNayOg?e=qv2sbB" target="_blank" rel="noopener noreferrer">Download</a></td>
+      <td><a href="https://seeedstudio88-my.sharepoint.com/:u:/g/personal/youjiang_yu_seeedstudio88_onmicrosoft_com/EUNTXrMsDcJCnIN2RvmXg6EBBLY6PRZiegvUjqI_N2i0YQ?e=SXEXXz" target="_blank" rel="noopener noreferrer">Download1</a></td>
+      <td><a href="https://szseeedstudio-my.sharepoint.cn/:u:/g/personal/youjiang_yu_szseeedstudio_partner_onmschina_cn/EZ7iNOxMxL9AjcKFPLygVT8Bg5qnkE-ZsMmNmHkZzNayOg?e=qv2sbB" target="_blank" rel="noopener noreferrer">Download2</a></td>
     </tr>
     <tr>
       <td>AGX Orin 64GB</td>
       <td>❌</td>
-      <td><a href="https://szseeedstudio-my.sharepoint.cn/:u:/g/personal/youjiang_yu_szseeedstudio_partner_onmschina_cn/ESfErbFgQl9NudcbGZXL3LMB9wavWcQwjtW6wYYtfwkE3A?e=H5sR4J" target="_blank" rel="noopener noreferrer">Download</a></td>
+      <td><a href="https://seeedstudio88-my.sharepoint.com/:u:/g/personal/youjiang_yu_seeedstudio88_onmicrosoft_com/ERoEi192vKFPnvFaqnqVz_oBNi3PAQ2W7gkZHpGu0XuuEw?e=pXYw9X" target="_blank" rel="noopener noreferrer">Download1</a></td>
+      <td><a href="https://szseeedstudio-my.sharepoint.cn/:u:/g/personal/youjiang_yu_szseeedstudio_partner_onmschina_cn/ESfErbFgQl9NudcbGZXL3LMB9wavWcQwjtW6wYYtfwkE3A?e=H5sR4J" target="_blank" rel="noopener noreferrer">Download2</a></td>
     </tr>
     <tr>
       <td>AGX Orin 64GB</td>
       <td>✅</td>
-      <td><a href="https://szseeedstudio-my.sharepoint.cn/:u:/g/personal/youjiang_yu_szseeedstudio_partner_onmschina_cn/Eccs1larF2FNhKi8MHred5kB4pQImN4ZHSgDM3BUDVzBtQ?e=reKIhD" target="_blank" rel="noopener noreferrer">Download</a></td>
+      <td><a href="https://seeedstudio88-my.sharepoint.com/:u:/g/personal/youjiang_yu_seeedstudio88_onmicrosoft_com/Ecebi5JjKaVHmY-DymgG8AIBPRgAuCXVCrf4IYiKIfsMxA?e=OJPKwB" target="_blank" rel="noopener noreferrer">Download1</a></td>
+      <td><a href="https://szseeedstudio-my.sharepoint.cn/:u:/g/personal/youjiang_yu_szseeedstudio_partner_onmschina_cn/Eccs1larF2FNhKi8MHred5kB4pQImN4ZHSgDM3BUDVzBtQ?e=reKIhD" target="_blank" rel="noopener noreferrer">Download2</a></td>
+    </tr>
+    <tr>
+      <td rowSpan={4}>6</td>
+      <td>AGX Orin 32GB</td>
+      <td>❌</td>
+      <td><a href="https://seeedstudio88-my.sharepoint.com/:u:/g/personal/youjiang_yu_seeedstudio88_onmicrosoft_com/ERTmpYBKF2tAodLyqpajhLkBxPdGUIWXfGytdCGwNu28qw?e=cJIbtM" target="_blank" rel="noopener noreferrer">Download1</a></td>
+      <td><a href="https://szseeedstudio-my.sharepoint.cn/:u:/g/personal/youjiang_yu_szseeedstudio_partner_onmschina_cn/EeHcCFk-chtDnEzoXiwvxZwBQuK3I3mTOAJ8mnZJE-P2uA?e=X9g0HK" target="_blank" rel="noopener noreferrer">Download2</a></td>
+    </tr>
+    <tr>
+      <td>AGX Orin 32GB</td>
+      <td>✅</td>
+      <td><a href="https://seeedstudio88-my.sharepoint.com/:u:/g/personal/youjiang_yu_seeedstudio88_onmicrosoft_com/Ef5wlNXtxVRIulSKwJTT3ocBmCBlHbQNVnz3LRDJtRwlGQ?e=KAIiVS" target="_blank" rel="noopener noreferrer">Download1</a></td>
+      <td><a href="https://szseeedstudio-my.sharepoint.cn/:u:/g/personal/youjiang_yu_szseeedstudio_partner_onmschina_cn/EX5HoeV09eFKtWj9YhAfgZ8Bt2k9bxxxSO5-TQBZoGLB-Q?e=hvcfG1" target="_blank" rel="noopener noreferrer">Download2</a></td>
+    </tr>
+    <tr>
+      <td>AGX Orin 64GB</td>
+      <td>❌</td>
+      <td><a href="https://seeedstudio88-my.sharepoint.com/:u:/g/personal/youjiang_yu_seeedstudio88_onmicrosoft_com/EWbP7xmg-fRAs7N-7iL42QMBaRcQvV23IITvt-uC4p2rUg?e=XZmnzC" target="_blank" rel="noopener noreferrer">Download1</a></td>
+      <td><a href="https://szseeedstudio-my.sharepoint.cn/:u:/g/personal/youjiang_yu_szseeedstudio_partner_onmschina_cn/EY-HFdsaHWVOvJJ5fMynVO0BvEOv5W0h1IxeSfesNFRYag?e=5thYHs" target="_blank" rel="noopener noreferrer">Download2</a></td>
+    </tr>
+    <tr>
+      <td>AGX Orin 64GB</td>
+      <td>✅</td>
+      <td><a href="https://seeedstudio88-my.sharepoint.com/:u:/g/personal/youjiang_yu_seeedstudio88_onmicrosoft_com/EUK5fwDqq0hNgcnyXg_-qXUBa9qnRJQ0AXdcInMIJWtbZg?e=iFVAAl" target="_blank" rel="noopener noreferrer">Download1</a></td>
+      <td><a href="https://szseeedstudio-my.sharepoint.cn/:u:/g/personal/youjiang_yu_szseeedstudio_partner_onmschina_cn/EUmpL5LNJDRLjoC6oQg6Vv4BgQ9eA4MUl4yE43fycz667w?e=Xw5nga" target="_blank" rel="noopener noreferrer">Download2</a></td>
     </tr>
   </tbody>
 </table>
 </div>
 
 :::danger
-The image file is approximately 4.5GB in size and should take around 15 minutes to download. Please kindly wait for the download to complete.
+The jetpack5 image file is approximately **4.5GB** in size and should take around 15 minutes to download. The Jetpack6 image file is approximately **16.7GB** in size and should take around 60 minutes to download. Please kindly wait for the download to complete.
 :::
 
 ### Enter Force Recovery Mode

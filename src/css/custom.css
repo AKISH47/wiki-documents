@@ -36,18 +36,20 @@
 	font-size: 0.85rem;
 	font-weight: bold;
 }
-
-.navbar_dorp_items {
-	display: inline-block;
-	color: var(--text-color);
-	font-size: 0.92rem;
-	font-weight: bold;
+@media (min-width: 768px) {
+	.navbar_dorp_items {
+		display: inline-block;
+		color: var(--text-color);
+		font-size: 0.92rem;
+		font-weight: bold;
+	}
+	
+	.navbar_doc_right_items {
+		display: inline-block;
+		color: var(--text-color);
+	}
 }
 
-.navbar_doc_right_items {
-	display: inline-block;
-	color: var(--text-color);
-}
 .header-SSCMA {
 	margin-left: -10px;
   }
@@ -107,6 +109,17 @@
 	text-decoration: none;
 }
 .start_card_wrapper {
+}
+
+/* red text */
+
+.danger {
+    color: red;
+    font-weight: bold;
+}
+
+.red-text {
+    color: red;
 }
 
 /* inroduced production */
@@ -659,6 +672,31 @@
 	.youtube-video-r {
 		width: 100%; /* 在小屏幕上占据全部宽度 */
 		margin: 10px 0; /* 在小屏幕上减少上下边距 */
+	}
+}
+
+.video-mp4 {
+	width: 100%;
+	max-width: 800px;
+	margin: -10px auto;
+	display: block;
+	border-radius: 24px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+	aspect-ratio: 9 / 9;
+}
+
+/* 中等屏幕（例如平板电脑）的响应式设计 */
+@media only screen and (min-width: 600px) and (max-width: 992px) {
+	.video-mp4 {
+		width: 80%;
+	}
+}
+
+/* 小屏幕（例如手机）的响应式设计 */
+@media only screen and (max-width: 599px) {
+	.video-mp4 {
+		width: 100%;
+		margin: 10px 0;
 	}
 }
 
@@ -1609,6 +1647,10 @@ a.reComputer_compare:hover .reComputer_compare_label3 {
 
 .sensecap3:hover {
 	transform: scale(1.1);
+}
+
+.hidden {
+	display: none !important;
 }
 
 /* .DocSearch-HitsFooter a {

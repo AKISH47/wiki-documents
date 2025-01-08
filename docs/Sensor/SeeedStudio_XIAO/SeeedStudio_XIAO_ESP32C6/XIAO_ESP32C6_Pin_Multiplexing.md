@@ -62,32 +62,33 @@ Before we begin, let's review all the pins that the XIAO ESP32C6 has and its fun
 - 3V3 - This is the regulated output from the onboard regulator. You can draw 700mA
 - GND - Power/data/signal ground <!-- Need to be confirmed -->
 
-## Serial
+## Serial Communication
 
-The XIAO ESP32C6 has a hardware UART for serial communication.
+There are two methods for serial communication with the XIAO ESP32C6: `software serial` and `hardware serial`. Software serial is commonly used for flexibility, while hardware serial offers better performance.
 
-### Hardware Preparation
+### Hardware Setup
 
-1. Connect the **TX pin** of an *external device* to the RX pin (`D7`) of the XIAO.
-2. Connect the **RX pin** of the *external device* to the TX pin (`D6`) of the XIAO.
+1. Connect the **TX pin** of the external device to the RX pin (`D7`) of the XIAO ESP32C6.
+2. Connect the **RX pin** of the external device to the TX pin (`D6`) of the XIAO ESP32C6.
 
-### Code
-
-Here's an Arduino sketch demonstrating serial communication:
+### Code Examples
 
 #### Software Serial
 
-You'll need to install [EspSoftwareSerial](https://github.com/plerup/espsoftwareserial) to implement Arduino software serial.
+To use software serial, install the [EspSoftwareSerial](https://github.com/plerup/espsoftwareserial) library.
+
+:::tip
+Currently we recommend version **7.0.0** of the EspSoftwareSerial library. Other versions may have varying degrees of problems that prevent the soft serial port from working properly.
+:::
 
 ```cpp
 #include <SoftwareSerial.h>
 
-// RX pin, TX pin
-SoftwareSerial mySerial(D7, D6);
+SoftwareSerial mySerial(D7, D6); // RX, TX
 
 void setup() {
   Serial.begin(9600);
-  mySerial.begin(9600); // Baud rate for software serial
+  mySerial.begin(9600);
 }
 
 void loop() {
@@ -105,29 +106,30 @@ void loop() {
 }
 ```
 
-In this example, software serial communication is set up on pins 2 (RX) and 3 (TX) using a baud rate of 9600. The `loop` function checks for incoming data on both the hardware serial port (`Serial`) and the software serial port (`mySerial`), and echoes back the received data to the other port.
+This example sets up software serial on pins `D7 (RX)` and `D6 (TX)` at 9600 baud. It monitors both the hardware serial (USB) and software serial ports, echoing received data between them.
 
 #### Hardware Serial
 
-In the Arduino framework, the UART0 peripheral, which corresponds to pins D6/D7 at the hardware level, is referred to as Serial0.
+The XIAO ESP32C6 features a hardware UART (UART0) for serial communication, corresponding to pins D7/D6.
 
 ```cpp
 #include <HardwareSerial.h>
-HardwareSerial mySerial(0); // Alias for UART0 (Serial0)
+
+HardwareSerial mySerial(0); // UART0 (Serial0)
 
 void setup() {
-  Serial.begin(9600); // Initialize hardware serial (USB)
-  mySerial.begin(9600); // Initialize UART0 (Serial0)
+  Serial.begin(9600);  // USB serial
+  mySerial.begin(9600); // UART0
 }
 
 void loop() {
-  if (Serial.available()) { // Check if data is available on USB serial
+  if (Serial.available()) {
     char data = Serial.read();
     Serial.print("Received on USB: ");
     Serial.println(data);
   }
   
-  if (mySerial.available()) { // Check if data is available on UART0 (Serial0)
+  if (mySerial.available()) {
     char data = mySerial.read();
     Serial.print("Received on UART0: ");
     Serial.println(data);
@@ -135,18 +137,18 @@ void loop() {
 }
 ```
 
-This code demonstrates using the hardware serial port UART0 (referred to as Serial0 in the Arduino framework) for serial communication. It initializes both the USB serial port (`Serial`) and the UART0 serial port (`mySerial`) in the setup() function.
-
-In the loop() function, it checks for incoming data on both serial ports. If data is available on the USB serial port (Serial), it reads the data and prints a message indicating it was received on USB. If data is available on the UART0 serial port (`mySerial`), it reads the data and prints a message indicating it was received on UART0.
+This example uses the hardware UART0 (Serial0) for communication. It initializes both the USB serial and UART0, then monitors both ports for incoming data, printing received messages to the USB serial port.
 
 #### Serial1 Usage
 
-According to the above XIAO ESP32C6 Pin diagrams for specific parameters,we can observe that there are TX pin and RX pin,This is different from serial communication, but the usage is also very similar, except that a few parameters need to be added,So nex,we will use the pins led out by the chip for serial communication
+According to the above XIAO ESP32C6 Pin diagrams for specific parameters, we can observe that there are TX pin and RX pin. 
+This is different from serial communication, but the usage is also very similar, except that a few parameters need to be added. 
+So next, we will use the pins led out by the chip for serial communication.
 
 Core Function that need to be include:
 
 - `Serial1.begin(BAUD,SERIAL_8N1,RX_PIN,TX_PIN);` -- enalbe Serial1,the function prototype : `<Serial.Type>.begin(unsigned long baud, uint32_t config, int8_t rxPin, int8_t txPin);`
-  - `baud`  :badu rate
+  - `baud`  :baud rate
   - `config`:Configuration bit
   - `rxPin` :Receive Pin
   - `txPin` :Send Pin
@@ -185,8 +187,10 @@ The XIAO ESP32C6 has 12 GPIO pins that you can configure as input or output.
 
 ### Hardware Preparation
 
-1. Connect an LED to pin `D10`, with a current-limiting resistor in series.
-2. Connect a button to pin `D1`, with an external pull-up resistor (optional if using the internal pull-up resistor).
+1. Connect a button to pin `D1`:
+   - Use an external pull-up resistor (optional if using the internal pull-up resistor).
+2. Connect an LED to pin `D10`:
+   - Include a current-limiting resistor in series with the LED.
 
 ### Software Implementation
 
